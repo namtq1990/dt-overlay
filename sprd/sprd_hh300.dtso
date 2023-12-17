@@ -1,0 +1,55 @@
+// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
+/*
+ * sam9x60_curiosity_wilc3000.dtso - Device Tree file for SAM9x60-CURIOSITY board
+ * overlay blob for ATWILC3000 - Wireless Modules.
+ *
+ * Copyright (C) 2022 Microchip Technology, Inc. and its subsidiaries
+ * Author: Durai Manickam KR <durai.manickamkr@microchip.com>
+ *
+ */
+/dts-v1/;
+/plugin/;
+
+#include <dt-bindings/clock/at91.h>
+#include "dt-bindings/pinctrl/at91.h"
+#include <dt-bindings/gpio/gpio.h>
+#include <dt-bindings/interrupt-controller/irq.h>
+#include <dt-bindings/input/input.h>
+#include <dt-bindings/mfd/atmel-flexcom.h>
+
+&lcd {
+	compatible = "waveshare,rpi-lcd-35";
+//	compatible = "sitronix,st7789v_custom";
+	rotation = <180>;
+};
+
+&i2c10 {
+	status = "disabled";
+};
+
+&flx10 {
+	atmel,flexcom-mode = <ATMEL_FLEXCOM_MODE_USART>;
+};
+&uart10 {
+	status = "okay";
+	#address-cells = <1>;
+	#size-cells = <0>;
+	pinctrl-names = "default";
+	pinctrl-0 = <&pinctrl_flx10_default>;
+};
+
+&pinctrl_flx10_default {
+			atmel,pins =
+				<AT91_PIOC 16 AT91_PERIPH_C AT91_PINCTRL_NONE
+				 AT91_PIOC 17 AT91_PERIPH_C AT91_PINCTRL_NONE>;
+		};
+
+&{/} {
+	vibrator: vibrator {
+		compatible = "gpio-vibrator";
+		enable-gpios = <&pioB 11 GPIO_ACTIVE_HIGH>;
+		vcc-supply = <&vdd1_3v3>;
+		status = "disabled";	// Conflict with led
+	};
+};
+
