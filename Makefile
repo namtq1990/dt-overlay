@@ -9,6 +9,7 @@ DTC?=$(KERNEL_BUILD_DIR)/scripts/dtc/dtc
 # workaround to make mkimage use the same dtc as we do
 PATH:=$(shell dirname $(DTC)):$(PATH)
 
+SPRD_DTBO_OBJECTS:= $(patsubst %.dtso,%.dtbo,$(wildcard sprd/*.dtso))
 AT91SAM9X5EK_DTBO_OBJECTS:= $(patsubst %.dtso,%.dtbo,$(wildcard at91sam9x5ek/*.dtso))
 SAM9X60EK_DTBO_OBJECTS:= $(patsubst %.dtso,%.dtbo,$(wildcard sam9x60ek/*.dtso))
 SAMA5D27_SOM1_EK_DTBO_OBJECTS:= $(patsubst %.dtso,%.dtbo,$(wildcard sama5d27_som1_ek/*.dtso))
@@ -31,6 +32,8 @@ MPFS_ICICLE_DTBO_OBJECTS:= $(patsubst %.dtso,%.dtbo,$(wildcard mpfs_icicle/*.dts
 
 %.itb: %.its %_dtbos
 	mkimage -D "-i$(KERNEL_BUILD_DIR)/arch/$(ARCH)/boot/ -i$(KERNEL_BUILD_DIR)/arch/$(ARCH)/boot/dts -p 1000 $(DTC_OPTIONS)" -f $< $@
+	
+sprd_dtbos: $(SPRD_DTBO_OBJECTS)
 
 at91sam9x5ek_dtbos: $(AT91SAM9X5EK_DTBO_OBJECTS)
 
