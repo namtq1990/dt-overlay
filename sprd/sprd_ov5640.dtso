@@ -1,0 +1,75 @@
+// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
+/*
+ * sam9x60_curiosity_wilc3000.dtso - Device Tree file for SAM9x60-CURIOSITY board
+ * overlay blob for ATWILC3000 - Wireless Modules.
+ *
+ * Copyright (C) 2022 Microchip Technology, Inc. and its subsidiaries
+ * Author: Durai Manickam KR <durai.manickamkr@microchip.com>
+ *
+ */
+/dts-v1/;
+/plugin/;
+
+#include <dt-bindings/clock/at91.h>
+#include "dt-bindings/pinctrl/at91.h"
+#include <dt-bindings/gpio/gpio.h>
+
+&i2c0 {
+	#address-cells = <1>;
+	#size-cells = <0>;
+
+	ov5640: camera@3c {
+		compatible = "ovti,ov5640";
+		reg = <0x3c>;
+		pinctrl-names = "default";
+		pinctrl-0 = <&pinctrl_pck0_as_isi_mck &pinctrl_sensor_power &pinctrl_sensor_reset>;
+		pwdn-gpios = <&pioA 14 GPIO_ACTIVE_HIGH>;
+		resetb-gpios = <&pioC 18 GPIO_ACTIVE_LOW>;
+		clocks = <&pmc PMC_TYPE_SYSTEM 8>;
+		clock-names = "xclk";
+		assigned-clocks = <&pmc PMC_TYPE_SYSTEM 8>;
+		assigned-clock-rates = <25000000>;
+		status = "okay";
+
+		port {
+			ov5640_0: endpoint {
+				remote-endpoint = <&isi_0>;
+				bus-width = <8>;
+				data-shift = <2>; /* lines 9:2 are used */
+				hsync-active = <0>;
+				vsync-active = <0>;
+				pclk-sample = <1>;
+			};
+		};
+	};
+};
+
+&isi {
+	port {
+		isi_0: endpoint {
+			remote-endpoint = <&ov5640_0>;
+			bus-width = <8>;
+			vsync-active = <1>;
+			hsync-active = <1>;
+		};
+	};
+};
+
+&pinctrl {
+	camera_sensor {
+		pinctrl_pck0_as_isi_mck: pck0_as_isi_mck-0 {
+			atmel,pins =
+				<AT91_PIOC 15 AT91_PERIPH_C AT91_PINCTRL_NONE>; /* ISI_MCK */
+		};
+
+		pinctrl_sensor_power: sensor_power-0 {
+			atmel,pins =
+				<AT91_PIOA 14 AT91_PERIPH_GPIO AT91_PINCTRL_NONE>;
+		};
+		pinctrl_sensor_reset: sensor_reset-0 {
+			atmel,pins =
+				<AT91_PIOC 18 AT91_PERIPH_GPIO AT91_PINCTRL_NONE>;
+		};
+	};
+};
+
