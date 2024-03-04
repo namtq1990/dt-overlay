@@ -38,6 +38,19 @@
 	pinctrl-0 = <&pinctrl_flx10_default>;
 };
 
+&flx3 {
+	atmel,flexcom-mode = <ATMEL_FLEXCOM_MODE_USART>;
+	status = "okay";
+	
+	uart3: serial@200 {
+		#address-cells = <1>;
+		#size-cells = <0>;
+		pinctrl-names = "default";
+		pinctrl-0 = <&pinctrl_flx3_uart>;
+		status = "okay";
+	};
+};
+
 &pinctrl_flx10_default {
 			atmel,pins =
 				<AT91_PIOC 16 AT91_PERIPH_C AT91_PINCTRL_NONE
