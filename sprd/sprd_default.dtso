@@ -17,6 +17,9 @@
 	rotation = <0>;
 };
 
+&usb2 {
+	vbus-supply = <&usb_otg_vbus>;
+};
 
 &btn_left {
 	linux,code = <BTN_TRIGGER_HAPPY3>;

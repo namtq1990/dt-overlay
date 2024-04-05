@@ -141,10 +141,10 @@
 			};
 		};
 
-		fdt_st7789v {
-			description = "Device Tree blob St7789v overlay";
+		fdt_sprd {
+			description = "Device Tree blob sprd overlay";
 			data =
-			/incbin/("./sprd/sprd_st7789v.dtbo");
+			/incbin/("./sprd/sprd_default.dtbo");
 			type = "flat_dt";
 			arch = "arm";
 			compression = "none";
@@ -203,9 +203,9 @@
 			fdt = "fdt_hh300";
 		};
 
-		st7789v {
-			description = "FDT overlay blob for st7789v";
-			fdt = "fdt_st7789v";
+		sprd {
+			description = "FDT overlay blob for SPRD";
+			fdt = "fdt_sprd";
 		};
 	};
 };
