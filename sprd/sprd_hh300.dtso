@@ -23,6 +23,18 @@
 	rotation = <180>;
 };
 
+&i2c0 {
+	
+	#address-cells = <1>;
+	#size-cells = <0>;
+
+	gyro@1e {
+		compatible = "honeywell,hmc5883l";
+		reg = <0x1e>;
+		status = "okay";
+	};
+};
+
 &i2c10 {
 	status = "disabled";
 };
@@ -41,7 +53,7 @@
 &flx3 {
 	atmel,flexcom-mode = <ATMEL_FLEXCOM_MODE_USART>;
 	status = "okay";
-	
+
 	uart3: serial@200 {
 		#address-cells = <1>;
 		#size-cells = <0>;
