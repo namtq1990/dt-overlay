@@ -23,8 +23,8 @@
 		reg = <0x3c>;
 		pinctrl-names = "default";
 		pinctrl-0 = <&pinctrl_pck0_as_isi_mck &pinctrl_sensor_power &pinctrl_sensor_reset>;
-		pwdn-gpios = <&pioA 14 GPIO_ACTIVE_HIGH>;
-		resetb-gpios = <&pioC 18 GPIO_ACTIVE_LOW>;
+		powerdown-gpios = <&pioA 14 GPIO_ACTIVE_HIGH>;
+		reset-gpios = <&pioC 18 GPIO_ACTIVE_LOW>;
 		clocks = <&pmc PMC_TYPE_SYSTEM 8>;
 		clock-names = "xclk";
 		assigned-clocks = <&pmc PMC_TYPE_SYSTEM 8>;
@@ -72,4 +72,5 @@
 		};
 	};
 };
+
 
