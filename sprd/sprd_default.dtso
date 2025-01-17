@@ -15,7 +15,7 @@
 
 &i2c0 {
 	camera@3c {
-		rotation = <180>;
+		rotation = <0>;
 		status = "disabled";
 	};
 };
