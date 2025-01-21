@@ -17,6 +17,8 @@
 &i2c0 {
 	#address-cells = <1>;
 	#size-cells = <0>;
+	
+	i2c-sda-hold-time-ns = <300>;
 
 	ov5640: camera@3c {
 		compatible = "ovti,ov5640";
