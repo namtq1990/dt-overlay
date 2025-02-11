@@ -9,19 +9,24 @@
  */
 /dts-v1/;
 /plugin/;
-
+#include <dt-bindings/clock/at91.h>
 #include "dt-bindings/pinctrl/at91.h"
 #include <dt-bindings/gpio/gpio.h>
-
 &sdmmc1 {
 	#address-cells = <1>;
 	#size-cells = <0>;
 	status = "okay";
 	mmc-pwrseq = <&wifi_pwrseq>;
+	max-frequency = <25000000>;
+
 	wilc: wilc@1 {
 		compatible = "microchip,wilc1000", "microchip,wilc3000";
 		reg = <1>;
 		bus-width = <4>;
+		interrupts = <28 0x0>;
+		interrupt-parent = <&pioA>;
+		assigned-clocks = <&pmc PMC_TYPE_SYSTEM 9>;
+		assigned-clock-rates = <32768>;
 		status = "okay";
 	};
 };
@@ -46,4 +51,3 @@
 		};
 	};
 };
-
