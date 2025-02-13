@@ -12,19 +12,25 @@
 #include <dt-bindings/clock/at91.h>
 #include "dt-bindings/pinctrl/at91.h"
 #include <dt-bindings/gpio/gpio.h>
+#include <dt-bindings/interrupt-controller/irq.h>
+
 &sdmmc1 {
 	#address-cells = <1>;
 	#size-cells = <0>;
 	status = "okay";
 	mmc-pwrseq = <&wifi_pwrseq>;
+	mmc-wilc = <&wilc_sdio>;
 	max-frequency = <25000000>;
+};
 
-	wilc: wilc@1 {
+&{/} {
+	wilc_sdio: wilc_sdio {
 		compatible = "microchip,wilc1000", "microchip,wilc3000";
 		reg = <1>;
 		bus-width = <4>;
-		interrupts = <28 0x0>;
-		interrupt-parent = <&pioA>;
+		clocks = <&pmc PMC_TYPE_SYSTEM 9>;
+		clock-names = "rtc";
+		irq-gpios = <&pioA 28 0>;
 		assigned-clocks = <&pmc PMC_TYPE_SYSTEM 9>;
 		assigned-clock-rates = <32768>;
 		status = "okay";
