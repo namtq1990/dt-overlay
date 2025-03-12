@@ -36,13 +36,11 @@
 		pinctrl-0 = <&pinctrl_flx3_default>;
 		status = "okay";
 
-		gyro@1e {
-			compatible = "honeywell,hmc5883l";
-			reg = <0x1e>;
-			mount-matrix = "1", "0", "0","0", "-1", "0", "0", "0", "-1";
+		mmc5983@30 {
+			compatible = "memsic,mmc5983";
+			reg = <0x30>;
 			status = "okay";
 		};
-
 	};
 };
 
