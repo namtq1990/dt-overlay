@@ -51,7 +51,7 @@
 	rotation = <0>;
 };
 
-&usb2 {
+&usb1 {
 	vbus-supply = <&usb_otg_vbus>;
 };
 
