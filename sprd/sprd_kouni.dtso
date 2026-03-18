@@ -49,7 +49,7 @@
 		status = "okay";
 
 		dwm1000@0 {
-			compatible = "decawave,dwm1000";
+			compatible = "rohm,dh2228fv";
 			reg = <0>;
 			spi-max-frequency = <2000000>;
 			interrupt-parent = <&pioC>;
