@@ -10,6 +10,10 @@
 	status = "disabled";
 };
 
+&i2c3 {
+	status = "disabled";
+};
+
 &flx9 {
 	atmel,flexcom-mode = <ATMEL_FLEXCOM_MODE_TWI>;
 	status = "okay";
@@ -26,12 +30,6 @@
 			compatible = "invensense,icm20948";
 			reg = <0x68>;
 			status = "okay";
-		};
-
-		gyro@1e {
-			compatible = "honeywell,hmc5883l";
-			reg = <0x1e>;
-			status = "disabled";
 		};
 	};
 };
