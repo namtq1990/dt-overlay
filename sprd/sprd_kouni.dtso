@@ -5,6 +5,7 @@
 
 #include <dt-bindings/mfd/atmel-flexcom.h>
 #include <dt-bindings/interrupt-controller/irq.h>
+#include <dt-bindings/pinctrl/at91.h>
 
 &uart9 {
 	status = "disabled";
